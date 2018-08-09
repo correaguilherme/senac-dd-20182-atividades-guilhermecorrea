@@ -1,4 +1,6 @@
-package br.sc.senac.dd.gui;
+package br.sc.senac.dd.aula04.exercicio;
+
+import com.sun.xml.internal.ws.Closeable;
 
 public class Menu {
 
@@ -12,7 +14,7 @@ public class Menu {
 		
 		Caminhao ca1 = new Caminhao("Scania",10000,"Cinza",6,2005,600);
 		
-		Automovel[] automoveis = new Automovel[3];
+		
 
 	}
 

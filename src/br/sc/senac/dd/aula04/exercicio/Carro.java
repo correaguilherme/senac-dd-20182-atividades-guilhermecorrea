@@ -1,4 +1,4 @@
-package br.sc.senac.dd.gui;
+package br.sc.senac.dd.aula04.exercicio;
 
 public class Carro extends Automovel {
 
