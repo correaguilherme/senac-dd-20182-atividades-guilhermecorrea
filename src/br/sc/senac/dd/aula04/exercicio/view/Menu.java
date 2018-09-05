@@ -1,5 +1,6 @@
 package br.sc.senac.dd.aula04.exercicio.view;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +8,8 @@ import javax.swing.JOptionPane;
 
 import br.sc.senac.dd.aula04.exercicio.model.vo.CaminhaoVO;
 import br.sc.senac.dd.aula04.exercicio.model.vo.CarroVO;
+import br.sc.senac.dd.aula04.exercicio.model.vo.MotoVO;
+import controller.ControladoraCarro;
 
 public class Menu {
 
@@ -18,7 +21,9 @@ public class Menu {
 	private static final int OPCAO_SAIR = 6;
 
 	private static List<CarroVO> carros = new ArrayList<CarroVO>();
-
+	private static List<MotoVO> motos = new ArrayList<MotoVO>();
+	private static List<CaminhaoVO> caminhoes = new ArrayList<CaminhaoVO>();
+	
 	public void apresentarMenu(){
 		try{
 			int opcaoMenu = -1;
@@ -114,17 +119,111 @@ public class Menu {
 	}
 
 	private void cadastrarMoto() {
-		// TODO Auto-generated method stub
+		int id = -1;
+		try{
+			id = Integer.parseInt(JOptionPane.showInputDialog("Informe o identificador:"));
+		}catch(NumberFormatException ex){
+			JOptionPane.showMessageDialog(null, "Chassi deve ser um número inteiro",
+					"Atenção", JOptionPane.ERROR_MESSAGE, null);
+		}
+		String modelo = JOptionPane.showInputDialog("Informe o modelo:");
+		String chassi = JOptionPane.showInputDialog("Informe o chassi:");
+		String anoFabricacao = JOptionPane.showInputDialog("Informe o ano:");
+		String marca = JOptionPane.showInputDialog("Informe o marca:");
 
+		if(id == -1 || modelo == null || chassi == null
+				|| anoFabricacao == null || marca == null){
+			//Cancelar no JOptionPane retorna uma string nula
+			apresentarMenu();
+		}else{
+			MotoVO novaMoto = new MotoVO(id, marca, modelo, anoFabricacao, chassi);
+
+			if(listaMotosNaoContem(id)){
+				motos.add(novaMoto);
+			}else{
+				JOptionPane.showMessageDialog(null, "Moto já cadastrada",
+						"Atenção", JOptionPane.ERROR_MESSAGE, null);
+			}
+		}
+	}
+	
+	private boolean listaMotosNaoContem(int idNovaMoto) {
+		boolean naoContem = true;
+
+		for(MotoVO m: motos){
+			if(m.getId() == idNovaMoto){
+				naoContem = false;
+				break;
+			}
+		}
+
+		return naoContem;
 	}
 
 	private void cadastrarCaminhao() {
-		// TODO Auto-generated method stub
+		int id = -1;
+		try{
+			id = Integer.parseInt(JOptionPane.showInputDialog("Informe o identificador:"));
+		}catch(NumberFormatException ex){
+			JOptionPane.showMessageDialog(null, "Chassi deve ser um número inteiro",
+					"Atenção", JOptionPane.ERROR_MESSAGE, null);
+		}
+		String modelo = JOptionPane.showInputDialog("Informe o modelo:");
+		String chassi = JOptionPane.showInputDialog("Informe o chassi:");
+		String anoFabricacao = JOptionPane.showInputDialog("Informe o ano:");
+		String marca = JOptionPane.showInputDialog("Informe o marca:");
 
+		if(id == -1 || modelo == null || chassi == null
+				|| anoFabricacao == null || marca == null){
+			//Cancelar no JOptionPane retorna uma string nula
+			apresentarMenu();
+		}else{
+			CaminhaoVO novoCaminhao = new CaminhaoVO(id, marca, modelo, anoFabricacao, chassi);
+
+			if(listaCaminhaoNaoContem(id)){
+				caminhoes.add(novoCaminhao);
+			}else{
+				JOptionPane.showMessageDialog(null, "Caminhao já cadastrado",
+						"Atenção", JOptionPane.ERROR_MESSAGE, null);
+			}
+		}
+	}
+	
+	private boolean listaCaminhaoNaoContem(int idNovoCaminhao) {
+		boolean naoContem = true;
+
+		for(CaminhaoVO c: caminhoes){
+			if(c.getId() == idNovoCaminhao){
+				naoContem = false;
+				break;
+			}
+		}
+
+		return naoContem;
 	}
 
 	private void cadastrarCarro(){
-		int id = -1;
+		
+		CarroVO carro = new CarroVO();
+		
+		carro.setModelo(JOptionPane.showInputDialog("Digite o modelo do carro"));
+		
+		carro.setChassi(JOptionPane.showInputDialog("Digite o chassi do carro"));
+		
+		carro.setAnoFabricacao(JOptionPane.showInputDialog("Digite o ano de fabricação do carro"));
+		
+		carro.setMarca(JOptionPane.showInputDialog("Digite a marca do carro"));
+				
+		ControladoraCarro controladoraCarro = new ControladoraCarro();
+		try {
+			controladoraCarro.cadastrarCarroController(carro);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
+	}
+		/* int id = -1;
 		try{
 			id = Integer.parseInt(JOptionPane.showInputDialog("Informe o identificador:"));
 		}catch(NumberFormatException ex){
@@ -150,7 +249,7 @@ public class Menu {
 						"Atenção", JOptionPane.ERROR_MESSAGE, null);
 			}
 		}
-	}
+	} */
 
 	private boolean listaCarrosNaoContem(int idNovoCarro) {
 		boolean naoContem = true;
@@ -169,8 +268,8 @@ public class Menu {
 		String mensagem = "Exercício 4";
 		mensagem += "\n Opções:";
 		mensagem += "\n 1 - Cadastrar carro";
-		mensagem += "\n 2 - Cadastrar moto";
-		mensagem += "\n 3 - Cadastrar caminhão";
+		mensagem += "\n 2 - Cadastrar caminhão";
+		mensagem += "\n 3 - Cadastrar moto";
 		mensagem += "\n 4 - Exibir caminhão e carro por chassi";
 		mensagem += "\n 5 - Exibir todas as motos";
 		mensagem += "\n 6 - Sair";

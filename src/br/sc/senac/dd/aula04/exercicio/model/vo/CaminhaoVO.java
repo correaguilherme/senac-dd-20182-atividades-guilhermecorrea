@@ -7,7 +7,7 @@ public class CaminhaoVO extends AutomovelVO {
 	private int numeroEixos;
 	
 	public CaminhaoVO(int id, String marca, String modelo, 
-			String anoFabricacao, String chassi, CarroceriaVO carroceria) {
+			String anoFabricacao, String chassi) {
 		super(id, marca, modelo, anoFabricacao, chassi);
 
 		this.carroceria = carroceria;

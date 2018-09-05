@@ -31,12 +31,12 @@ public class CarroceriaDAO extends BaseDAO<CarroceriaVO> {
 
 	@Override
 	public String getNomesColunasInsert() {
-		return "MARCA, MODELO, ANOFABRICACAO, CHASSI";
+		return "CAPACIDADECARGAQUILOS";
 	}
 
 	@Override
 	public String getInterrogacoesInsert() {
-		return "?, ?, ?, ?";
+		return "?";
 	}
 
 	@Override
@@ -49,10 +49,7 @@ public class CarroceriaDAO extends BaseDAO<CarroceriaVO> {
 		 *  
 		 */
 		try {
-			preparedStmt.setString(1, entidade.getMarca());
-			preparedStmt.setString(2, entidade.getModelo());
-			preparedStmt.setString(3, entidade.getAnoFabricacao());
-			preparedStmt.setString(4, entidade.getChassi());
+			preparedStmt.setDouble(1, entidade.getCapacidadeCargaQuilos());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -72,11 +69,7 @@ public class CarroceriaDAO extends BaseDAO<CarroceriaVO> {
 		 */
 		
 		String clausulaSet = "";
-		 clausulaSet = getNomeColunaChavePrimaria() + " = " + entidade.getId() + ",";
-		 clausulaSet += "MARCA ='" + entidade.getMarca() + "'";
-		 clausulaSet += "MODELO ='" + entidade.getModelo() + "'";
-		 clausulaSet += "ANOFABRICACAO ='" + entidade.getAnoFabricacao() + "'";
-		 clausulaSet += "CHASSI ='" + entidade.getChassi() + "'";
+		 clausulaSet += "CAPACIDADECARGAQUILOS ='" + entidade.getCapacidadeCargaQuilos() + "'";
 
 		return null;
 	}
@@ -84,13 +77,9 @@ public class CarroceriaDAO extends BaseDAO<CarroceriaVO> {
 	@Override
 	public CarroceriaVO construirObjetoDoResultSet(ResultSet resultado) {
 
-		CarroceriaVO carro = new CarroceriaVO();
+		CarroceriaVO carroceria = new CarroceriaVO();
 		try {
-			carro.setId(Integer.parseInt(resultado.getString(1)));
-			carro.setMarca(resultado.getString(2));
-			carro.setModelo(resultado.getString(3));
-			carro.setAnoFabricacao(resultado.getString(4));
-			carro.setChassi(resultado.getString(5));
+			carroceria.setCapacidadeCargaQuilos(Double.parseDouble(resultado.getString(1)));
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -98,14 +87,14 @@ public class CarroceriaDAO extends BaseDAO<CarroceriaVO> {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return carro;
+		return carroceria;
 	}
 
 	public boolean existeRegistroPorId(int Id) {
 		Connection conn = Banco.getConnection();
 		Statement stmt = Banco.getStatement(conn);
 		ResultSet resultado = null;
-		String query = "SELECT * FROM moto WHERE id like '" + Id + "'";
+		String query = "SELECT * FROM carroceria WHERE id like '" + Id + "'";
 		try {
 			resultado = stmt.executeQuery(query);
 			if (resultado.next()){
@@ -126,14 +115,14 @@ public class CarroceriaDAO extends BaseDAO<CarroceriaVO> {
 		Connection conn = Banco.getConnection();
 		Statement stmt = Banco.getStatement(conn);
 		ResultSet resultado = null;
-		String query = "SELECT * FROM moto WHERE idCarroceria = " + idCarroceria;
+		String query = "SELECT * FROM carroceria WHERE idCarroceria = " + idCarroceria;
 		try {
 			resultado = stmt.executeQuery(query);
 			if (resultado.next()){
 				return true;
 			}
 		} catch (SQLException e) {
-			System.out.println("Erro ao executar a Query que verifica existência de Registro por Id.");
+			System.out.println("Erro ao executar a Query que verifica existência de Carroceria por Id.");
 			return false;
 		} finally {
 			Banco.closeResultSet(resultado);

@@ -84,7 +84,23 @@ public class CarroDAO extends BaseDAO<CarroVO> {
 	@Override
 	public CarroVO construirObjetoDoResultSet(ResultSet resultado) {
 
-		CarroVO carro = new CarroVO();
+		CarroVO novoCarro = null; //retorna null caso o resultado esteja vazio
+		try {
+			novoCarro = new CarroVO();
+			novoCarro.setId(resultado.getInt("ID"));
+			novoCarro.setMarca(resultado.getString("MARCA"));
+			novoCarro.setModelo(resultado.getString("MODELO"));
+			novoCarro.setAnoFabricacao(resultado.getString("ANOFABRICACAO"));
+			novoCarro.setChassi(resultado.getString("CHASSI"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return novoCarro;
+	}	
+			
+		
+	/*	CarroVO carro = new CarroVO();
 		try {
 			carro.setId(Integer.parseInt(resultado.getString(1)));
 			carro.setMarca(resultado.getString(2));
@@ -99,7 +115,7 @@ public class CarroDAO extends BaseDAO<CarroVO> {
 			e.printStackTrace();
 		}
 		return carro;
-	}
+	} */
 
 	public boolean existeRegistroPorChassi(String chassi) {
 		Connection conn = Banco.getConnection();
