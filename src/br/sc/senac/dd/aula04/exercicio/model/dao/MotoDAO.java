@@ -101,18 +101,18 @@ public class MotoDAO extends BaseDAO<MotoVO> {
 		return carro;
 	}
 
-	public boolean existeRegistroPorId(int Id) {
+	public boolean existeRegistroPorChassi(String chassi) {
 		Connection conn = Banco.getConnection();
 		Statement stmt = Banco.getStatement(conn);
 		ResultSet resultado = null;
-		String query = "SELECT * FROM moto WHERE id like '" + Id + "'";
+		String query = "SELECT * FROM moto WHERE chassi like '" + chassi + "'";
 		try {
 			resultado = stmt.executeQuery(query);
 			if (resultado.next()){
 				return true;
 			}
 		} catch (SQLException e) {
-			System.out.println("Erro ao executar a Query que verifica existência de Moto por ID.");
+			System.out.println("Erro ao executar a Query que verifica existência de Moto por Chassi.");
 			return false;
 		} finally {
 			Banco.closeResultSet(resultado);

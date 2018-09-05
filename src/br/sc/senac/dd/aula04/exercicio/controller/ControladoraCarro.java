@@ -1,4 +1,4 @@
-package controller;
+package br.sc.senac.dd.aula04.exercicio.controller;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

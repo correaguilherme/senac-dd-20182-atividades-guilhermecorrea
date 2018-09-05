@@ -101,18 +101,18 @@ public class CaminhaoDAO extends BaseDAO<CaminhaoVO> {
 		return carro;
 	}
 
-	public boolean existeRegistroPorId(int Id) {
+	public boolean existeRegistroPorChassi(String chassi) {
 		Connection conn = Banco.getConnection();
 		Statement stmt = Banco.getStatement(conn);
 		ResultSet resultado = null;
-		String query = "SELECT * FROM moto WHERE id like '" + Id + "'";
+		String query = "SELECT * FROM caminhao WHERE chassi like '" + chassi + "'";
 		try {
 			resultado = stmt.executeQuery(query);
 			if (resultado.next()){
 				return true;
 			}
 		} catch (SQLException e) {
-			System.out.println("Erro ao executar a Query que verifica existência de Caminhao por ID.");
+			System.out.println("Erro ao executar a Query que verifica existência de Caminhao por Chassi.");
 			return false;
 		} finally {
 			Banco.closeResultSet(resultado);
@@ -126,14 +126,14 @@ public class CaminhaoDAO extends BaseDAO<CaminhaoVO> {
 		Connection conn = Banco.getConnection();
 		Statement stmt = Banco.getStatement(conn);
 		ResultSet resultado = null;
-		String query = "SELECT * FROM moto WHERE idCaminhao = " + idCaminhao;
+		String query = "SELECT * FROM caminhao WHERE idCaminhao = " + idCaminhao;
 		try {
 			resultado = stmt.executeQuery(query);
 			if (resultado.next()){
 				return true;
 			}
 		} catch (SQLException e) {
-			System.out.println("Erro ao executar a Query que verifica existência de Registro por Id.");
+			System.out.println("Erro ao executar a Query que verifica existência de Caminhao por Id.");
 			return false;
 		} finally {
 			Banco.closeResultSet(resultado);

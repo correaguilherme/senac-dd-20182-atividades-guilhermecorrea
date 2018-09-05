@@ -6,10 +6,10 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import br.sc.senac.dd.aula04.exercicio.controller.ControladoraCarro;
 import br.sc.senac.dd.aula04.exercicio.model.vo.CaminhaoVO;
 import br.sc.senac.dd.aula04.exercicio.model.vo.CarroVO;
 import br.sc.senac.dd.aula04.exercicio.model.vo.MotoVO;
-import controller.ControladoraCarro;
 
 public class Menu {
 
