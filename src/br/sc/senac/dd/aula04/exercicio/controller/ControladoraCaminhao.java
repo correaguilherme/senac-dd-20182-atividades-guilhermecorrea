@@ -23,9 +23,9 @@ public class ControladoraCaminhao {
 		caminhaoBO.atualizarCaminhaoBO(caminhaoVO);
 	}
 
-	public ArrayList<CaminhaoVO> consultarTodosCaminhaoesController() throws SQLException {
+	public ArrayList<CaminhaoVO> consultarTodosCaminhoesController() throws SQLException {
 		CaminhaoBO caminhaoBO = new CaminhaoBO();
-		return caminhaoBO.consultarCaminhaosBO();
+		return caminhaoBO.consultarCaminhoesBO();
 	}
 
 	public CaminhaoVO consultarCaminhaoController(CaminhaoVO caminhaoVO) throws SQLException {

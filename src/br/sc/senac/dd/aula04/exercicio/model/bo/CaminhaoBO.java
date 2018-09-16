@@ -52,13 +52,13 @@ public class CaminhaoBO {
 		}
 	}
 	
-	public ArrayList<CaminhaoVO> consultarCaminhaosBO() throws SQLException {
+	public ArrayList<CaminhaoVO> consultarCaminhoesBO() throws SQLException {
 		CaminhaoDAO caminhaoDAO = new CaminhaoDAO();
-		ArrayList<CaminhaoVO> caminhaosVO = (ArrayList<CaminhaoVO>) caminhaoDAO.listarTodos();
-		if(caminhaosVO.isEmpty()){
+		ArrayList<CaminhaoVO> caminhoesVO = (ArrayList<CaminhaoVO>) caminhaoDAO.listarTodos();
+		if(caminhoesVO.isEmpty()){
 			JOptionPane.showMessageDialog(null, "\nLista de Caminhão não Localizado.");
 		}
-		return caminhaosVO;
+		return caminhoesVO;
 	}
 
 	public CaminhaoVO consultarCaminhaoBO(CaminhaoVO caminhaoVO) throws SQLException {

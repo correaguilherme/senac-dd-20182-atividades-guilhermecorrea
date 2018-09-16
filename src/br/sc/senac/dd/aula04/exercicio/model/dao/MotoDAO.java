@@ -19,6 +19,8 @@ import br.sc.senac.dd.aula04.exercicio.model.vo.MotoVO;
  */
 public class MotoDAO extends BaseDAO<MotoVO> {
 
+    private String MotoVO;
+
 	@Override
 	public String getNomeTabela() {
 		return "MOTO";
@@ -78,7 +80,7 @@ public class MotoDAO extends BaseDAO<MotoVO> {
 		 clausulaSet += "ANOFABRICACAO ='" + entidade.getAnoFabricacao() + "'";
 		 clausulaSet += "CHASSI ='" + entidade.getChassi() + "'";
 
-		return null;
+		return MotoVO;
 	}
 
 	@Override
@@ -144,9 +146,15 @@ public class MotoDAO extends BaseDAO<MotoVO> {
 	}
 
 	@Override
-	public void setValoresAtributosUpdate(MotoVO entidade, PreparedStatement stmt) {
-		// TODO Auto-generated method stub
-
+	public void setValoresAtributosUpdate(MotoVO entidade, PreparedStatement preparedStmt) {
+		try {
+			preparedStmt.setString(1, entidade.getMarca());
+			preparedStmt.setString(2, entidade.getModelo());
+			preparedStmt.setString(3, entidade.getAnoFabricacao());
+			preparedStmt.setString(4, entidade.getChassi());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }
 

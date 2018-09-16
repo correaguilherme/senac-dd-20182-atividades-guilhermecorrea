@@ -210,7 +210,7 @@ public abstract class BaseDAO<T> {
 	 */
 	public abstract String getValoresClausulaSetUpdate(T entidade);
 
-	public abstract void setValoresAtributosUpdate(T entidade, PreparedStatement stmt);
+	public abstract void setValoresAtributosUpdate(T entidade, PreparedStatement preparedStmt);
 
 	/**
 	 * Converte um resultSet para um objeto do tipo T.

@@ -19,6 +19,8 @@ import br.sc.senac.dd.aula04.exercicio.model.vo.CarroVO;
  */
 public class CarroDAO extends BaseDAO<CarroVO> {
 
+    private String CarroVO;
+
 	@Override
 	public String getNomeTabela() {
 		return "CARRO";
@@ -78,7 +80,7 @@ public class CarroDAO extends BaseDAO<CarroVO> {
 		 clausulaSet += "ANOFABRICACAO ='" + entidade.getAnoFabricacao() + "'";
 		 clausulaSet += "CHASSI ='" + entidade.getChassi() + "'";
 
-		return null;
+		return CarroVO;
 	}
 
 	@Override
@@ -160,9 +162,15 @@ public class CarroDAO extends BaseDAO<CarroVO> {
 	}
 
 	@Override
-	public void setValoresAtributosUpdate(CarroVO entidade, PreparedStatement stmt) {
-		// TODO Auto-generated method stub
-
+	public void setValoresAtributosUpdate(CarroVO entidade, PreparedStatement preparedStmt) {
+		try {
+			preparedStmt.setString(1, entidade.getMarca());
+			preparedStmt.setString(2, entidade.getModelo());
+			preparedStmt.setString(3, entidade.getAnoFabricacao());
+			preparedStmt.setString(4, entidade.getChassi());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

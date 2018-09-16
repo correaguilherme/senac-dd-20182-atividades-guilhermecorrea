@@ -23,7 +23,7 @@ public class ControladoraCarro {
 		carroBO.atualizarCarroBO(carroVO);
 	}
 
-	public ArrayList<CarroVO> consultarTodosCarroesController() throws SQLException {
+	public ArrayList<CarroVO> consultarTodosCarrosController() throws SQLException {
 		CarroBO carroBO = new CarroBO();
 		return carroBO.consultarCarrosBO();
 	}

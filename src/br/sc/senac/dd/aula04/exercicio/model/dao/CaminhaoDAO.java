@@ -19,6 +19,8 @@ import br.sc.senac.dd.aula04.exercicio.model.vo.CaminhaoVO;
  */
 public class CaminhaoDAO extends BaseDAO<CaminhaoVO> {
 
+    private String CaminhaoVO;
+
 	@Override
 	public String getNomeTabela() {
 		return "CAMINHAO";
@@ -78,8 +80,20 @@ public class CaminhaoDAO extends BaseDAO<CaminhaoVO> {
 		 clausulaSet += "ANOFABRICACAO ='" + entidade.getAnoFabricacao() + "'";
 		 clausulaSet += "CHASSI ='" + entidade.getChassi() + "'";
 
-		return null;
+		return CaminhaoVO;
 	}
+        
+        @Override
+	public void setValoresAtributosUpdate(CaminhaoVO entidade, PreparedStatement preparedStmt) {
+            try {
+			preparedStmt.setString(1, entidade.getMarca());
+			preparedStmt.setString(2, entidade.getModelo());
+			preparedStmt.setString(3, entidade.getAnoFabricacao());
+			preparedStmt.setString(4, entidade.getChassi());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+        }
 
 	@Override
 	public CaminhaoVO construirObjetoDoResultSet(ResultSet resultado) {
@@ -142,11 +156,6 @@ public class CaminhaoDAO extends BaseDAO<CaminhaoVO> {
 		}
 		return false;
 	}
-
-	@Override
-	public void setValoresAtributosUpdate(CaminhaoVO entidade, PreparedStatement stmt) {
-		// TODO Auto-generated method stub
-
-	}
+        
 }
 

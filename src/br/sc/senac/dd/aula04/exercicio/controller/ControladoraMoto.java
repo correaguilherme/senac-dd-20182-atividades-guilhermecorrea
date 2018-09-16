@@ -23,7 +23,7 @@ public class ControladoraMoto {
 		motoBO.atualizarMotoBO(motoVO);
 	}
 
-	public ArrayList<MotoVO> consultarTodosMotoesController() throws SQLException {
+	public ArrayList<MotoVO> consultarTodasMotosController() throws SQLException {
 		MotoBO motoBO = new MotoBO();
 		return motoBO.consultarMotosBO();
 	}

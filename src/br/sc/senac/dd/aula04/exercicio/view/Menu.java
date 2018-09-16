@@ -7,9 +7,13 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import br.sc.senac.dd.aula04.exercicio.controller.ControladoraCarro;
+import br.sc.senac.dd.aula04.exercicio.controller.ControladoraMoto;
 import br.sc.senac.dd.aula04.exercicio.model.vo.CaminhaoVO;
 import br.sc.senac.dd.aula04.exercicio.model.vo.CarroVO;
 import br.sc.senac.dd.aula04.exercicio.model.vo.MotoVO;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
 
 public class Menu {
 
@@ -54,31 +58,42 @@ public class Menu {
 					mostrarMotos();
 					apresentarMenu();
 					break;
+                                case OPCAO_SAIR:
+					mostrarMensagemSaida();
+					break;
 				default:
 					mostrarMensagemOpcaoInvalida();
 					apresentarMenu();
 					break;
 				}
 			}
-			mostrarMensagemSaida();
 		}catch(NumberFormatException ex){
 			//TODO tratar
 		}
 	}
 
 	private void mostrarMensagemOpcaoInvalida() {
-		// TODO Auto-generated method stub
+		JOptionPane.showMessageDialog(null, "Opção Invalida!");
 		
 	}
 
 	private void mostrarMensagemSaida() {
-		// TODO Auto-generated method stub
+		int resposta = JOptionPane.showConfirmDialog(null, "Deseja realmente sair?", "Fechar sistema", JOptionPane.YES_NO_OPTION);
 
+                if (resposta == JOptionPane.YES_OPTION) {
+                setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                } else if (resposta == JOptionPane.NO_OPTION) {
+                apresentarMenu();
+                }
 	}
 
 	private void mostrarMotos() {
-		// TODO Auto-generated method stub
-
+		ControladoraMoto controladoraMoto = new ControladoraMoto();
+            try {
+                List<MotoVO> motos = controladoraMoto.consultarTodasMotosController();
+            } catch (SQLException ex) {
+                Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+            }
 	}
 
 	private void mostrarCarroOuCaminhao() {
@@ -101,8 +116,15 @@ public class Menu {
 	}
 
 	private CaminhaoVO obterCaminhaoPorChassi(String chassiInformado) {
-		// TODO Auto-generated method stub
-		return null;
+		CaminhaoVO caminhaoComChassiBuscado = null;
+		for(CaminhaoVO c: caminhoes){
+			if(c.getChassi().equals(chassiInformado)){
+				caminhaoComChassiBuscado = c;
+				break;
+			}
+		}
+		
+		return caminhaoComChassiBuscado;
 	}
 
 	private CarroVO obterCarroPorChassi(String chassiInformado) {
@@ -277,4 +299,8 @@ public class Menu {
 
 		return mensagem;
 	}
+
+    private void setDefaultCloseOperation(int EXIT_ON_CLOSE) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
