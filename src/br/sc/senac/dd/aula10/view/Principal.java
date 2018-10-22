@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 import java.awt.event.KeyEvent;
+import java.awt.event.InputEvent;
 
 public class Principal extends JFrame {
 
@@ -40,6 +41,7 @@ public class Principal extends JFrame {
 	 * Create the frame.
 	 */
 	public Principal() {
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 506, 417);
 		
@@ -51,6 +53,7 @@ public class Principal extends JFrame {
 		menuBar.add(mnProdutos);
 		
 		JMenuItem mnCadastrar = new JMenuItem("Cadastrar");
+		mnCadastrar.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2, 0));
 		mnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -59,10 +62,12 @@ public class Principal extends JFrame {
 		mnProdutos.add(mnCadastrar);
 		
 		JMenuItem mnListar = new JMenuItem("Listar");
+		mnListar.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F3, 0));
 		mnListar.setIcon(new ImageIcon("C:\\Users\\Guilherme Corr\u00EAa\\git\\senac-dd-20182-atividades-guilhermecorrea\\src\\br\\sc\\senac\\dd\\aula10\\icones\\icons8-no-invent\u00E1rio-50.png"));
 		mnProdutos.add(mnListar);
 		
 		JMenuItem mnRelatrio = new JMenuItem("Relat\u00F3rio");
+		mnRelatrio.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4, 0));
 		mnRelatrio.setIcon(new ImageIcon("C:\\Users\\Guilherme Corr\u00EAa\\git\\senac-dd-20182-atividades-guilhermecorrea\\src\\br\\sc\\senac\\dd\\aula10\\icones\\icons8-contabilidade-50.png"));
 		mnProdutos.add(mnRelatrio);
 		
@@ -71,14 +76,25 @@ public class Principal extends JFrame {
 		menuBar.add(mnClientes);
 		
 		JMenuItem mnCadastrar_1 = new JMenuItem("Cadastrar");
+		mnCadastrar_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				contentPane = new CadastroCliente();
+				setContentPane(contentPane);
+				revalidate();
+				
+			}
+		});
+		mnCadastrar_1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, InputEvent.CTRL_MASK));
 		mnCadastrar_1.setIcon(new ImageIcon("C:\\Users\\Guilherme Corr\u00EAa\\git\\senac-dd-20182-atividades-guilhermecorrea\\src\\br\\sc\\senac\\dd\\aula10\\icones\\icons8-adicionar-usu\u00E1rio-masculino-50.png"));
 		mnClientes.add(mnCadastrar_1);
 		
 		JMenuItem mnListar_1 = new JMenuItem("Listar");
+		mnListar_1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2, InputEvent.CTRL_MASK));
 		mnListar_1.setIcon(new ImageIcon("C:\\Users\\Guilherme Corr\u00EAa\\git\\senac-dd-20182-atividades-guilhermecorrea\\src\\br\\sc\\senac\\dd\\aula10\\icones\\icons8-procurar-usu\u00E1rio-masculino-50.png.png"));
 		mnClientes.add(mnListar_1);
 		
 		JMenuItem mnRelatrio_1 = new JMenuItem("Relat\u00F3rio");
+		mnRelatrio_1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F3, InputEvent.CTRL_MASK));
 		mnRelatrio_1.setIcon(new ImageIcon("C:\\Users\\Guilherme Corr\u00EAa\\git\\senac-dd-20182-atividades-guilhermecorrea\\src\\br\\sc\\senac\\dd\\aula10\\icones\\icons8-boletim-50.png"));
 		mnClientes.add(mnRelatrio_1);
 		
@@ -87,14 +103,17 @@ public class Principal extends JFrame {
 		menuBar.add(mnFuncionrios);
 		
 		JMenuItem mnCadastrar_2 = new JMenuItem("Cadastrar");
+		mnCadastrar_2.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, InputEvent.SHIFT_MASK));
 		mnCadastrar_2.setIcon(new ImageIcon("C:\\Users\\Guilherme Corr\u00EAa\\git\\senac-dd-20182-atividades-guilhermecorrea\\src\\br\\sc\\senac\\dd\\aula10\\icones\\icons8-adicionar-usu\u00E1rio-masculino-50.png"));
 		mnFuncionrios.add(mnCadastrar_2);
 		
 		JMenuItem mnListar_2 = new JMenuItem("Listar");
+		mnListar_2.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2, InputEvent.SHIFT_MASK));
 		mnListar_2.setIcon(new ImageIcon("C:\\Users\\Guilherme Corr\u00EAa\\git\\senac-dd-20182-atividades-guilhermecorrea\\src\\br\\sc\\senac\\dd\\aula10\\icones\\icons8-procurar-usu\u00E1rio-masculino-50.png.png"));
 		mnFuncionrios.add(mnListar_2);
 		
 		JMenuItem mnRelatrio_2 = new JMenuItem("Relat\u00F3rio");
+		mnRelatrio_2.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F3, InputEvent.SHIFT_MASK));
 		mnRelatrio_2.setIcon(new ImageIcon("C:\\Users\\Guilherme Corr\u00EAa\\git\\senac-dd-20182-atividades-guilhermecorrea\\src\\br\\sc\\senac\\dd\\aula10\\icones\\icons8-boletim-50.png"));
 		mnFuncionrios.add(mnRelatrio_2);
 		
@@ -108,6 +127,13 @@ public class Principal extends JFrame {
 		mnSobre.add(mnAjuda);
 		
 		JMenuItem mnVerso = new JMenuItem("Vers\u00E3o");
+		mnVerso.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				contentPane = new Sobre();
+				setContentPane(contentPane);
+				revalidate();
+			}
+		});
 		mnVerso.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F12, 0));
 		mnVerso.setIcon(new ImageIcon("C:\\Users\\Guilherme Corr\u00EAa\\git\\senac-dd-20182-atividades-guilhermecorrea\\src\\br\\sc\\senac\\dd\\aula10\\icones\\icons8-vers\u00F5es-50.png"));
 		mnSobre.add(mnVerso);
